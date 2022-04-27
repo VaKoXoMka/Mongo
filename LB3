@@ -1,0 +1,114 @@
+db.games.find({prise:"60"})
+db.games.find({game developer:null})
+db.games.find({prise:"60", game developer:null}) 
+db.games.find({DLS:["primary","Black hawk"]}) 
+db.games.find({"DLS.0": "primary"}) - обязательно с лапками(0 имеет в виду что это длс на первом месте в массиве)
+db.games.find({name:"Counter Strike GO", Prise: 60})
+db.games.find({name:"Counter Strike GO", Prise: 0}) 
+db.games.find({"Plase market.name":"steam"})
+
+db.games.find().limit(3) 
+db.games.find().skip(3) 
+db.games.find().sort({name:1)} 
+db.games.find().sort({$natural: 1)}.limit(3) 
+db.games.find({name:"Counter Strike GO"},{DLS:($slice:1)}) 
+
+db.games.find({"Game developer":/^V\w+/a})
+
+
+{
+   "Name": "Counter Strike GO",
+   "Prise": "60",
+   "Game developer": "Valve",
+   "Genre": "Shooter",
+   "Age": "16+"
+   "Platform": "PC",
+   "Plase market": {
+       "Name": "Steam",
+       "CountUser": "30000000",
+   },
+   "DLS": [
+       "primary",
+       "Black hawk"
+   ]
+},
+{
+   "Name": "PayDay2",
+   "Prise": "30",
+   "Game developer": "Overkill",
+   "Genre": "Co-op Shooter",
+   "Age": "16+"
+   "Platform": "PC, console"
+   "Plase market": {
+       "Name": "Steam",
+       "CountUser": "15000000",
+   },
+   "DLS": [
+       "Jon Wick dls",
+       "Gayge dls pack",
+       "Russian weapon pack",
+   ]
+},
+{
+   "Name": "The wicher 3",
+   "Prise": "60",
+   "Game developer": "CD Project Red",
+   "Genre": "RPG",
+   "Age": "18+"
+   "Platform": "PC, console"
+   "Plase market": {
+       "Name": "Steam",
+       "CountUser": "18000000",
+   },
+   "DLS": [
+       "Blood and wine",
+       "Stone heart",
+   ]
+},
+{
+   "Name": "ARK Survival Evolved",
+   "Prise": "45",
+   "Game developer": "Dev sur",
+   "Genre": "Survival",
+   "Age": "16+"
+   "Platform": "PC, console"
+   "Plase market": {
+       "Name": "Steam",
+       "CountUser": "3500000",
+   },
+   "DLS": [
+       "Crystal isles",
+       "Abberation",
+       "Ragnarok",
+   ]
+},
+{
+   "Name": "Battlefield 4",
+   "Prise": "60",
+   "Game developer": "DICE",
+   "Genre": "Shooter",
+   "Age": "16+"
+   "Platform": "PC, console"
+   "Plase market": {
+       "Name": "Origin",
+       "CountUser": "6000000",
+   },
+   "DLS": [
+       "New war",
+   ]
+},
+{
+   "Name": "Elden Ring",
+   "Prise": "60",
+   "Game developer": "FromSoftware",
+   "Genre": "RPG",
+   "Age": "18+"
+   "Platform": "PC, console"
+   "Plase market": {
+       "Name": "Steam",
+       "CountUser": "1000000",
+   },
+   "DLS": [
+       "First Tree",
+   ]
+},
