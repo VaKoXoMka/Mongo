@@ -1,0 +1,39 @@
+db.userbase.insert({
+   "firstName": "Іван",
+   "lastName": "Хоменко",
+   "fathername": "Валерійович",
+   "address": {
+       "streetAddress": "Чорновола 44",
+       "city": "Вишневе",
+   },
+   "phoneNumbers": [
+       "896876835",
+       "456463673"
+   ]
+})
+db.userbase.insert({
+   "firstName": "Валерій",
+   "lastName": "Федоров",
+   "fathername": "іванович",
+   "address": {
+       "streetAddress": "Чорновола 34",
+       "city": "Вишневе",
+   },
+   "phoneNumbers": [
+       "354736485",
+   ]
+})
+
+db.userbase.insert({
+   "firstName": "Карл",
+   "lastName": "Сергієнко",
+   "fathername": "Валерійович",
+   "address": {
+       "streetAddress": "Іванова 14",
+       "city": "Київ",
+       "postalCode": 101101
+   },
+   "phoneNumbers": [
+       "56756848",
+   ]
+})
