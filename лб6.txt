@@ -1,0 +1,41 @@
+db.createCollection("Developer")
+db.createCollection("game")
+
+db.game.insertOne({
+   "name": "DOTA 2",
+   "Prise": "FTP",
+   "Game developer": "Valve",
+   "Genre": "MOBA",
+   "Age": "16+",
+   "Platform": "PC"
+})
+
+	"acknowledged" : true,
+        "insertedId" : ObjectId("625a8b9fe26e05d60fc3e589")
+
+db.Developer.insertOne({
+   "name": "Valve",
+   "director": "Gabe Nuel",
+   "countstaff": "2000",
+   "country": "USA"
+})
+        "acknowledged" : true,
+        "insertedId" : ObjectId("625a8f31e26e05d60fc3e58c")
+
+game = ({"name": "Counter-Strike GO", "Prise": "60", "Game developer":{"$ref": "Game developer", "$id" : "625a8f31e26e05d60fc3e58c"}, "Genre": "Shooter", "Age": "16+", "Platform": "PC"})
+
+db.game.deleteOne({name : "Valve"}) - добавил не туда, пришлось удалять
+db.game.insertOne(game)
+db.game.find().pretty()
+
+
+
+
+
+
+
+
+
+
+
+
