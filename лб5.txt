@@ -1,15 +1,15 @@
 
-db.games.replaceOne({name: "Counter Strike GO"}, {name: "Counter Strike GO", age: "14+"})
-db.games.updateOne({name : "PayDay2"}, {$set: {name: "PayDay2", Prise : "12"}})
-db.games.updateOne({name : "The wicher 3"}, {$set: {Age :21+}})
-db.games.updateMany({prise : "60"}, {$set: {prise : "70"}})
-db.games.update({name : "ARK Survival Evolved"}, {$unset: {Game developer : "Dev sur"}})
-db.games.updateMany({name : "Counter Strike GO"}, {$push: {DLS: "Third"}})
-db.games.updateOne({name : "Counter Strike GO"}, {$push: {DLS: {$each: ["Front", "Front 2"], $position:1, $slice:5}}})
-db.games.update({name : "Counter Strike GO"}, {$addToSet: {DLS: "Front 2"}}) - Front 3 чтобы выполнилось
-db.games.updateOne({name : "Counter Strike GO"}, {$pop: {DLS: 1}})
-db.games.deleteOne({name : "Counter Strike GO"}) - тестить не обязательно, впадлу добавлять назад
-db.games.deleteOne({name : /^A\w+/i}) - удалить документ где имя на А
+db.games.replaceOne({Name: "Counter Strike GO"}, {Name: "Counter Strike GO", age: "14+"})
+db.games.updateOne({Name : "PayDay2"}, {$set: {Name: "PayDay2", Prise : "12"}})
+db.games.updateOne({Name : "The wicher 3"}, {$set: {Age :21+}})
+db.games.updateMany({Prise : "60"}, {$set: {prise : "70"}})
+db.games.update({Name : "ARK Survival Evolved"}, {$unset: {Game developer : "Dev sur"}})
+db.games.updateMany({Name : "Counter Strike GO"}, {$push: {DLS: "Third"}})
+db.games.updateOne({Name : "Counter Strike GO"}, {$push: {DLS: {$each: ["Front", "Front 2"], $position:1, $slice:5}}})
+db.games.update({Name : "Counter Strike GO"}, {$addToSet: {DLS: "Front 2"}}) - Front 3 чтобы выполнилось
+db.games.updateOne({Name : "Counter Strike GO"}, {$pop: {DLS: 1}})
+db.games.deleteOne({Name : "Counter Strike GO"}) - тестить не обязательно, впадлу добавлять назад
+db.games.deleteOne({Name : /^A\w+/i}) - удалить документ где имя на А
 
 
 
