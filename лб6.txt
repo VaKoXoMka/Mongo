@@ -10,8 +10,6 @@ db.game.insertOne({
    "Platform": "PC"
 })
 
-	"acknowledged" : true,
-        "insertedId" : ObjectId("625a8b9fe26e05d60fc3e589")
 
 db.Developer.insertOne({
    "name": "Valve",
@@ -20,22 +18,13 @@ db.Developer.insertOne({
    "country": "USA"
 })
         "acknowledged" : true,
-        "insertedId" : ObjectId("625a8f31e26e05d60fc3e58c")
+        "insertedId" : ObjectId("627b72f31849947fa3583b72")
 
 game = ({"name": "Counter-Strike GO", "Prise": "60", "Game developer":{"$ref": "Game developer", "$id" : "625a8f31e26e05d60fc3e58c"}, "Genre": "Shooter", "Age": "16+", "Platform": "PC"})
+db.game.insertOne(game)
 
 db.game.deleteOne({name : "Valve"}) - добавил не туда, пришлось удалять
-db.game.insertOne(game)
 db.game.find().pretty()
 
-
-
-
-
-
-
-
-
-
-
-
+627b72f31849947fa3583b72
+game = ({"name": "123", "Prise": "60", "Game developer":{"$ref": "Game developer", "$id" : "627b72f31849947fa3583b72"}, "Genre": "Shooter", "Age": "16+", "Platform": "PC"})
