@@ -1,0 +1,3 @@
+db.games.createIndex({"name":1})
+db.games.createIndex({"name":1, "prise":1},{"unique":true})
+db.games.getIndexes()
