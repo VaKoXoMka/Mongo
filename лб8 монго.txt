@@ -1,0 +1,74 @@
+стол №9
+коллекция предметов:
+призначення:
+	діабет
+	Хвороби нирок
+
+
+
+
+
+опис приготування: 
+айди - 1
+назва - сирі
+опис - без шкірки
+вага - 50
+
+////////////
+
+колекция игры
+
+db.createCollection("dls")
+db.createCollection("developer")
+db.createCollection("games")
+db.createCollection("platform")
+db.dls.insertOne({
+	"name": "dls1",
+	"prise": "5",
+	"datestart": "19.03.2022",
+	"version": "2.01"
+})
+627f82c3751814b3604ef0f5
+db.dls.insertOne({
+	"name": "dls2",
+	"prise": "5",
+	"datestart": "01.03.2022",
+	"version": "3.21"
+})
+627f82cf751814b3604ef0f6
+db.platform.insertOne({
+	"name": "PC",
+	"placemarket": "steam",
+	"game options": "max"
+})
+627f82e3751814b3604ef0f7
+db.platform.insertOne({
+	"name": "PS5",
+	"placemarket": "PS store",
+	"game options": "hight"
+})
+627f82f4751814b3604ef0f8
+db.developer.insertOne({
+	"name": "Valve",
+   "director": "Gabe Nuel",
+   "countstaff": "2000",
+   "country": "USA"
+})
+627f8300751814b3604ef0f9
+db.developer.insertOne({
+	"name": "Activision",
+   "director": "Bobby kotick",
+   "countstaff": "1800",
+   "country": "USA"
+})
+627f830c751814b3604ef0fa
+
+game = ({"name": "Counter-Strike GO", "prise": "30", "developer":{"$ref": "developer", "$id" : "627f8300751814b3604ef0f9"}, "genre": "Shooter", "age": "16+", "platform": {"$ref": "platform", "$id" : "627f82e3751814b3604ef0f7"}, "dls":{"$ref": "dls", "$id" : "627f82c3751814b3604ef0f5"}})
+db.games.insertOne(game)
+
+game = ({"name": "Call of Duty 4 modern", "prise": "60", "developer":{"$ref": "developer", "$id" : "627f830c751814b3604ef0fa"}, "genre": "Shooter", "age": "18+", "platform": {"$ref": "platform", "$id" : "627f82f4751814b3604ef0f8"}, "dls":{"$ref": "dls", "$id" : "627f82cf751814b3604ef0f6"}})
+db.games.insertOne(game)
+
+game = ({"name": "Call of Duty 2019", "prise": "60", "developer":{"$ref": "developer", "$id" : "627f830c751814b3604ef0fa"}, "genre": "Shooter", "age": "18+", "platform": [{"$ref": "platform", "$id" : "627f82f4751814b3604ef0f8"},{"$ref": "platform", "$id" : "627f82c3751814b3604ef0f5"}], "dls":{"$ref": "dls", "$id" : "627f82cf751814b3604ef0f6"}})
+db.games.insertOne(game)
+db.games.find().pretty()
