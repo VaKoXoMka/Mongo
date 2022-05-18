@@ -1,3 +1,5 @@
+колекция игры
+
 db.createCollection("dls")
 db.createCollection("developer")
 db.createCollection("games")
