@@ -1,0 +1,136 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Configuration;
+using MongoDB.Bson.Serialization;
+namespace mongoapp1
+{
+    class game
+    {
+        public ObjectId Id { get; set; }
+        public string name { get; set; }
+        public string prise { get; set; }
+        public string genre { get; set; }
+        public string age { get; set; }
+        public string platform { get; set; }
+        public string dls { get; set; }
+        public developer developer { get; set; }
+    }
+    class developer
+    {
+        public string name { get; set; }
+        public string director { get; set; }
+        public int countstaff { get; set; }
+        public string country { get; set; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "mongodb://localhost:27017";
+            MongoClient client = new MongoClient(connectionString);
+            IMongoDatabase database = client.GetDatabase("test");
+            Console.WriteLine("");
+            Console.WriteLine("Отримання всiх бд iз сервера");
+            Console.WriteLine("");
+            GetDatabaseNames(client).GetAwaiter();
+            Console.ReadLine();
+            Console.WriteLine("");
+            Console.WriteLine("Отримаємо всi колекцiї всiх баз даних, якi є на серверi");
+            Console.WriteLine("");
+            GetCollectionsNames(client).GetAwaiter();
+            Console.ReadLine();
+            Console.WriteLine("");
+            Console.WriteLine("Створимо модель даних");
+            Console.WriteLine("");
+            SimpleDocument();
+            Console.WriteLine("");
+            Console.WriteLine("При створеннi документа ми можемо скористатися як стандартним класом C#, так i класом BsonDocument");
+            Console.WriteLine("");
+            BSONDocument();
+            Console.ReadLine();
+        }
+        private static async Task GetDatabaseNames(MongoClient client)
+        {
+            using (var cursor = await client.ListDatabasesAsync())
+            {
+                var databaseDocuments = await cursor.ToListAsync();
+                foreach (var databaseDocument in databaseDocuments)
+                {
+                    Console.WriteLine(databaseDocument["name"]);
+                }
+            }
+        }
+        private static async Task GetCollectionsNames(MongoClient client)
+        {
+            using (var cursor = await client.ListDatabasesAsync())
+            {
+                var dbs = await cursor.ToListAsync();
+                foreach (var db in dbs)
+                {
+                    Console.WriteLine("У базi даних {0} є наступнi колекцii:", db["name"]);
+                    IMongoDatabase database = client.GetDatabase(db["name"].ToString());
+                    using (var collCursor = await database.ListCollectionsAsync())
+                    {
+                        var colls = await collCursor.ToListAsync();
+                        foreach (var col in colls)
+                        {
+                            Console.WriteLine(col["name"]);
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
+        private static async Task SimpleDocument()
+        {
+            game game = new game
+            {
+                name = "Name1",
+                prise = "ftp",
+                genre = "rpg",
+                age = "16+",
+                platform = "Chorvatia",
+                dls = "1 hour 32 min",
+            };
+            game.developer = new developer { name = "Roflocompany", director = "Roflochel", countstaff = 1000, country = "USA"};
+            Console.WriteLine(game.ToJson());
+            Console.WriteLine("");
+            Console.WriteLine("Також можна виконати зворотну операцiю перетворення об'єкта в BsonDocument");
+            Console.WriteLine("");
+            ObjectToBson(game);
+        }
+        private static async Task BSONDocument()
+        {
+            BsonDocument doc = new BsonDocument
+            {
+                {"name" , "Name2"},
+                {"prise" , "60"},
+                {"genre" , "ab"},
+                {"age" , "14+"},
+                {"platform" , "PS"},
+                {"dls" , "dls3"},
+                { "actors",
+                    new BsonDocument
+                    {
+                        {"name" , "Rofl company 2"},
+                        {"director" , "pricolist"},
+                        {"countstaff" , 200},
+                        {"country" , "USA"},
+                    }
+                }
+            };
+            game p = BsonSerializer.Deserialize<game>(doc);
+            Console.WriteLine(p.ToJson());
+        }
+        private static async Task ObjectToBson(game game)
+        {
+            BsonDocument doc = game.ToBsonDocument();
+            Console.WriteLine(doc);
+        }
+    }
+}
