@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Conventions;
+namespace mongoConsoleApp2
+{
+    class game
+    {
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonElement("game name")]
+        public string name { get; set; }
+        [BsonIgnore]
+        public string prise { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string genre { get; set; }
+        [BsonIgnoreIfNull]
+        public string age { get; set; }
+        [BsonElement("platform")]
+        public string platform { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string dls { get; set; }
+        public developer developer { get; set; }
+    }
+    class game2
+    {
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonElement("name")]
+        public string name { get; set; }
+        [BsonIgnore]
+        public string prise { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string genre { get; set; }
+        [BsonIgnoreIfNull]
+        public string age { get; set; }
+        [BsonElement("platform")]
+        public string platform { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string dls { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public string role { get; set; }
+        public developer developer { get; set; }
+    }
+    class developer
+    {
+        public string name { get; set; }
+        public string director { get; set; }
+        public int countstuff { get; set; }
+        public string country { get; set; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            game p = new game
+            {
+                name = "гейм1",
+                prise = "60",
+                genre = "shooter",
+                age = "8+",
+                platform = "PC",
+                dls = "dls5",
+            };
+            p.developer = new developer
+            {
+                name = "roflcomp3",
+                director = "chel3",
+                countstuff = 130,
+                country = "USA",
+            };
+            Console.WriteLine(p.ToJson());
+            Console.ReadKey();
+            BsonClassMap.RegisterClassMap<game2>(cm =>
+            {
+                cm.AutoMap();
+                cm.MapMember(f => f.Id).SetElementName("CC1FF2CC83DC56F4C261C2DD");
+                cm.MapMember(f => f.name).SetElementName("Counter-Strike GO");
+            });
+            game game = new game
+            {
+                name = "гейм1",
+                prise = "60",
+                genre = "shooter",
+                age = "8+",
+                platform = "PC",
+                dls = "dls5",
+            };
+            BsonDocument doc = game.ToBsonDocument();
+            Console.WriteLine(doc);
+            Console.ReadLine();
+            var conventionPack = new ConventionPack();
+            conventionPack.Add(new CamelCaseElementNameConvention());
+            ConventionRegistry.Register("idcase", conventionPack, t => true);
+            game = new game
+            {
+                name = "гейм2",
+                prise = "30",
+                genre = "shooter",
+                age = "16+",
+                platform = "PC",
+                dls = "dls5",
+            };
+            doc = game.ToBsonDocument();
+            Console.WriteLine(doc);
+            Console.ReadLine();
+        }
+    }
+}

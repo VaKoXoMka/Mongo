@@ -1,0 +1,148 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+namespace MongoDBApp
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ SaveDocs().GetAwaiter().GetResult();
+ Console.ReadLine();
+ }
+ private static async Task SaveDocs()
+ {
+ string connectionString = "mongodb://localhost";
+ var client = new MongoClient(connectionString);
+ var database = client.GetDatabase("games");
+ var collection = 
+database.GetCollection<BsonDocument>("games");
+ BsonDocument person1 = new BsonDocument//game1
+{
+{"name", "game11"},
+{"prise", "50"},//new BsonArray{"", ""}
+{"developer","123"},
+{"genre", "GENRE1" },
+{"age", "16+"},
+{"platform", "PS"},
+{"dls","dls1"},
+};
+ await collection.InsertOneAsync(person1);
+ }
+ }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+namespace MongoDBApp
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ SaveDocs().GetAwaiter().GetResult();
+ Console.ReadLine();
+ }
+ private static async Task SaveDocs()
+ {
+ string connectionString = "mongodb://localhost";
+ var client = new MongoClient(connectionString);
+ var database = client.GetDatabase("test");
+ var collection = 
+database.GetCollection<BsonDocument>("games");
+ BsonDocument person1 = new BsonDocument
+{
+{"name", "name43"},
+{"prise", "50"},//new BsonArray{"", ""}
+{"developer","123"},
+{"genre", "GENRE2" },
+{"age", "16+"},
+{"platform", "PC"},
+{"dls","dls12"},
+};
+ BsonDocument person2 = new BsonDocument
+{
+{"name", "dudu"},
+{"prise", "30"},//new BsonArray{"", ""}
+{"developer","1234"},
+{"genre", "GENRE8" },
+{"age", "16+"},
+{"platform", "PC"},
+{"dls","dls1"},
+ await collection.InsertManyAsync(new[] { person1, 
+person2 });
+ }
+ }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+namespace MongoDBApp
+{
+ class Program
+ {
+ class game
+ {
+ public ObjectId Id { get; set; }
+ public string name { get; set; }
+ public string prise { get; set; }
+ public string genre { get; set; }
+ public string age { get; set; }
+ public string platform { get; set; }
+ public string dls { get; set; }
+ }
+ class developer
+ {
+ public string name{ get; set; }
+ public string director { get; set; }
+ public int countstaff { get; set; }
+ public string country { get; set; }
+ }
+ static void Main(string[] args)
+ {
+ SaveDocs().GetAwaiter().GetResult();
+ Console.ReadLine();
+ }
+ private static async Task SaveDocs()
+ {
+ string connectionString = "mongodb://localhost";
+ var client = new MongoClient(connectionString);
+ var database = client.GetDatabase("test");
+ var collection = 
+database.GetCollection<Person>("games");
+ Person person1 = new Person
+ {
+ name = "HVS",
+ prise = "50+",
+ genre = "genre5",
+ age= "16+",
+ platform= "PC",
+ dls = "xvaDD",
+ actors = new actors
+ {
+ name = "dev1",
+ director = "dir1",
+countstaff = 250,
+country = "USA",
+
+ }
+ };
+ await collection.InsertOneAsync(person1);
+ Console.WriteLine(person1.Id);
+ }
+ }
+}
